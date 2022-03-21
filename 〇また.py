@@ -78,7 +78,6 @@ client = discord.Client()
 @tasks.loop(seconds=1)
 async def loop():
 
-    while(True):
         # ターゲットコミュニティの数だけ繰り返す
         targetCommunitys = getTarget()
         for targetCommunity in targetCommunitys:
