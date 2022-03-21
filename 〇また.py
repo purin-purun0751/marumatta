@@ -9,14 +9,9 @@ from bs4 import BeautifulSoup
 
 #DBに接続するためのやつ
 
-path = " "
-port = " "
-dbname = " "
-user = " "
-password = " "
-conText = "host={} port={} dbname={} user={} password={}"
-conText = conText.format(path,port,dbname,user,password)
-connection = psycopg2.connect(conText)
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+connection = psycopg2.connect(DATABASE_URL)
 
 cur = connection.cursor()
 sql = "select token,channel_id from settings"
