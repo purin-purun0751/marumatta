@@ -2,6 +2,7 @@ import requests
 import os.path
 import re
 import discord
+from discord.ext import tasks
 import asyncio
 import os, psycopg2
 import json
@@ -74,8 +75,8 @@ def addList(liveURL):
 client = discord.Client()
 
 # 起動時に動作する処理
-@client.event
-async def on_ready():
+@tasks.loop(seconds=1)
+async def loop():
 
     while(True):
         # ターゲットコミュニティの数だけ繰り返す
@@ -104,6 +105,8 @@ async def on_ready():
                 # 放送ID追記
                 addList(liveURL)
 
+#ループ処理実行
+loop.start()
        
 # Discordに接続
 client.run(TOKEN)
